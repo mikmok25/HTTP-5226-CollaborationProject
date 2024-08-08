@@ -1,0 +1,13 @@
+﻿@model VendorManagement2.Models.UserDto
+
+@{
+    ViewBag.Title = "DeleteConfirm";
+}
+
+<h2>Are you sure you want to delete this User?</h2>
+<a href="/User/List" class="btn btn-secondary">Cancel</a>
+<h3>Username: @Model.Username</h3>
+<h3>Email: @Model.Email</h3>
+<form action="/User/Delete/@Model.UserID" method="POST">
+    <input type="submit" value="Confirm Delete" class="btn btn-danger" />
+</form>

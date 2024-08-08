@@ -1,0 +1,84 @@
+﻿@model VendorManagement2.Models.ViewModels.DetailsEvent
+
+@{
+    ViewBag.Title = "Event Details";
+}
+
+<h2 class="my-4">Event Details</h2>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h3 class="card-title">@Model.SelectedEvent.EventName</h3>
+        <p class="card-text"><strong>Date:</strong> @Model.SelectedEvent.EventDate.ToString("yyyy-MM-dd")</p>
+        <p class="card-text"><strong>Description:</strong> @Model.SelectedEvent.EventDescription</p>
+        <p class="card-text"><strong>Location:</strong> @Model.SelectedEvent.EventLocation</p>
+        <p class="card-text"><strong>Type:</strong> @Model.SelectedEvent.EventType</p>
+    </div>
+</div>
+
+<h3 class="my-4">Users Associated with this Event</h3>
+
+<table class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th>User Name</th>
+            <th>Email</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.AssociatedUsers)
+        {
+            <tr>
+                <td>@item.Username</td>
+                <td>@item.Email</td>
+                <td>@Html.ActionLink("Unassociate", "UnAssociate", new { id = Model.SelectedEvent.EventID, UserId = item.UserID }, new { @class = "btn btn-danger btn-sm" })</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h3 class="my-4">Available Users</h3>
+
+<table class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th>User Name</th>
+            <th>Email</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.AvailableUsers)
+        {
+            <tr>
+                <td>@item.Username</td>
+                <td>@item.Email</td>
+                <td>
+                    @using (Html.BeginForm("Associate", "Event", new { id = Model.SelectedEvent.EventID, UserId = item.UserID }, FormMethod.Post))
+                    {
+                        <button type="submit" class="btn btn-success btn-sm">Associate</button>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Styles {
+    <style>
+        .card {
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .card-text {
+            margin-bottom: 0.5rem;
+        }
+    </style>
+}

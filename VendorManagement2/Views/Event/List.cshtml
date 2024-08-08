@@ -1,0 +1,46 @@
+﻿@model IEnumerable<VendorManagement2.Models.EventDto>
+
+@{
+    ViewBag.Title = "List";
+}
+
+<h2 class="my-4">List of Events</h2>
+<a href="/Event/New" class="btn btn-primary mb-4">New Event</a>
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a href="/Event/Details/@item.EventID">@item.EventName</a>
+                    </h5>
+                    <p class="card-text">Date: @item.EventDate.ToString("yyyy-MM-dd")</p>
+                    <p class="card-text">Location: @item.EventLocation</p>
+                    <div class="btn-group" role="group">
+                        <a href="/Event/Edit/@item.EventID" class="btn btn-warning btn-sm">Edit</a>
+                        <a href="/Event/DeleteConfirm/@item.EventID" class="btn btn-danger btn-sm">Delete</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section Styles {
+    <style>
+        .card {
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-title a {
+            text-decoration: none;
+            color: #000;
+        }
+
+            .card-title a:hover {
+                text-decoration: underline;
+            }
+    </style>
+}

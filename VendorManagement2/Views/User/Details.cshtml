@@ -1,0 +1,74 @@
+﻿@model VendorManagement2.Models.ViewModels.DetailsUser
+
+@{
+    ViewBag.Title = "User Details";
+}
+
+<h2 class="my-4">User Details</h2>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h4 class="card-title">User</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.SelectedUser.Username)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.SelectedUser.Username)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.SelectedUser.Email)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.SelectedUser.Email)
+            </dd>
+        </dl>
+    </div>
+</div>
+
+<h3 class="my-4">Events Associated with this User</h3>
+<table class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th>Event Name</th>
+            <th>Event Date</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.UserEvents)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.EventName)</td>
+                <td>@item.EventDate.ToString("yyyy-MM-dd")</td>
+                <td>
+                    @Html.ActionLink("Unassociate", "UnAssociate", new { id = Model.SelectedUser.UserID, EventId = item.EventID }, new { @class = "btn btn-danger btn-sm" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h3 class="my-4">Associate Event with this User</h3>
+@using (Html.BeginForm("Associate", "User", FormMethod.Post, new { @id = "associateForm" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.Hidden("id", Model.SelectedUser.UserID)
+    <div class="form-group row">
+        @Html.Label("EventId", "Event ID", htmlAttributes: new { @class = "col-sm-2 col-form-label" })
+        <div class="col-sm-10">
+            @Html.TextBox("EventId", null, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-sm-10 offset-sm-2">
+            <input type="submit" value="Associate" class="btn btn-primary" />
+        </div>
+    </div>
+}
+
+
+<div class="mt-3">
+    @Html.ActionLink("Back to List", "List", null, new { @class = "btn btn-secondary" })
+</div>
