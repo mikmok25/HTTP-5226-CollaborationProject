@@ -54,7 +54,7 @@ namespace VendorManagement2.Controllers
         /// <example>
         /// GET: api/UserData/ListUsersForEvent/1
         /// </example>
-        
+
 
         /// <summary>
         /// Returns Users not associated with a particular event.
@@ -226,7 +226,7 @@ namespace VendorManagement2.Controllers
         {
             if (!ModelState.IsValid)
             {
-               return BadRequest(ModelState);
+                return BadRequest(ModelState);
             }
 
             @user.CreatedAt = DateTime.Now;

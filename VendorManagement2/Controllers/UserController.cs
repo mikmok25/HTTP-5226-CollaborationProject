@@ -19,7 +19,7 @@ namespace VendorManagement2.Controllers
         static UserController()
         {
             client = new HttpClient();
-            client.BaseAddress = new Uri("https://localhost:44305/api/");
+            client.BaseAddress = new Uri("http://localhost:44324/api/");
         }
 
         // GET: api/UserData/ListUsers

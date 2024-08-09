@@ -10,7 +10,6 @@
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "VendorManagement2.Models.ApplicationDbContext";
         }
 
         protected override void Seed(VendorManagement2.Models.ApplicationDbContext context)

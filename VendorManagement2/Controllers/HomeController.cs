@@ -15,7 +15,7 @@ namespace VendorManagement2.Controllers
         static HomeController()
         {
             client = new HttpClient();
-            client.BaseAddress = new Uri("https://localhost:44305/api/");
+            client.BaseAddress = new Uri("http://localhost:44324/api/");
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
