@@ -1,0 +1,151 @@
+﻿﻿@model IEnumerable<VendorManagement2.Models.BuildDto>
+
+@{
+    ViewBag.Title = "Build List";
+}
+
+<h2>Build List</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Components</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td><a href="/Build/Details/@item.BuildID">@item.BuildName</td>
+                <td>@item.BuildDescription</td>
+                <td>
+                    <a href="/Build/Details/@item.BuildID" class="btn btn-success">View</a>
+                    <button class="btn btn-primary edit-btn" data-id="@item.BuildID" data-toggle="modal" data-target="#editModal">Edit</button>
+                    <button class="btn btn-danger delete-btn" data-id="@item.BuildID" data-toggle="modal" data-target="#deleteModal">Delete</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- Edit Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editModalLabel">Edit Build</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="editForm">
+                    <input type="hidden" id="BuildID" name="BuildID">
+                    <div class="form-group">
+                        <label for="BuildName">Name</label>
+                        <input type="text" class="form-control" id="BuildName" name="BuildName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="BuildDescription">Description</label>
+                        <input type="text" class="form-control" id="BuildDescription" name="BuildDescription" required>
+                    </div>
+                    <!-- Add other fields as necessary -->
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="saveEdit">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Delete Build</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete this build?</p>
+                <input type="hidden" id="BuildID" name="BuildID">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger confirm-delete">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@Html.ActionLink("Create New Build", "New", null, new { @class = "btn btn-success" })
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            // Event handler for edit button
+            $('.edit-btn').on('click', function () {
+                var buildId = $(this).data('id');
+                // Fetch build details using AJAX and populate the edit modal
+                $.ajax({
+                    url: '/api/builddata/findbuild/' + buildId,
+                    method: 'GET',
+                    success: function (build) {
+                        $('#editModal #BuildID').val(build.BuildID);
+                        $('#editModal #BuildName').val(build.BuildName);
+                        $('#editModal #BuildDescription').val(build.BuildDescription);
+                        // Populate other fields as necessary
+                    }
+                });
+            });
+
+            // Event handler for delete button
+            $('.delete-btn').on('click', function () {
+                var buildId = $(this).data('id');
+                // Set build ID in delete modal hidden field
+                $('#deleteModal #BuildID').val(buildId);
+            });
+
+            // Handle save changes in edit modal
+            $('#saveEdit').on('click', function () {
+                var buildId = $('#editModal #BuildID').val();
+                var buildData = {
+                    BuildID: buildId,
+                    BuildName: $('#editModal #BuildName').val(),
+                    BuildDescription: $('#editModal #BuildDescription').val()
+                    // Add other fields as necessary
+                };
+
+                $.ajax({
+                    url: '/api/builddata/updatebuild/' + buildId,
+                    method: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(buildData),
+                    success: function () {
+                        $('#editModal').modal('hide');
+                        location.reload();
+                    }
+                });
+            });
+
+            // Handle delete confirmation
+            $('.confirm-delete').on('click', function () {
+                var buildId = $('#deleteModal #BuildID').val();
+                $.ajax({
+                    url: '/api/builddata/deletebuild/' + buildId,
+                    method: 'POST',
+                    success: function () {
+                        $('#deleteModal').modal('hide');
+                        location.reload();
+                    }
+                });
+            });
+        });
+    </script>
+}

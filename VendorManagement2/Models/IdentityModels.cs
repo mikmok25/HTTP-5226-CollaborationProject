@@ -32,6 +32,10 @@ namespace VendorManagement2.Models
         public DbSet<UserEvent> UserEvents { get; set; }
         
         public DbSet<CategoryEvent> CategoryEvents { get; set; }
+
+        public DbSet<Component> Components { get; set; }
+        public DbSet<Build> Builds { get; set; }
+        public DbSet<BuildComponent> BuildComponents { get; set; }
         public static ApplicationDbContext Create()
         {
 
