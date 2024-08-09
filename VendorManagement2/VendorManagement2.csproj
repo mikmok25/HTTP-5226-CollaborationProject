@@ -182,6 +182,8 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Controllers\CategoryDataController.cs" />
     <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Controllers\EventDataController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -211,8 +213,26 @@
     <Compile Include="Migrations\202406210648150_AddUserEventForeignKey.designer.cs">
       <DependentUpon>202406210648150_AddUserEventForeignKey.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202408090439328_AddCategoryModel.cs" />
+    <Compile Include="Migrations\202408090439328_AddCategoryModel.designer.cs">
+      <DependentUpon>202408090439328_AddCategoryModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202408090447372_MakeCategoryIDNullable.cs" />
+    <Compile Include="Migrations\202408090447372_MakeCategoryIDNullable.designer.cs">
+      <DependentUpon>202408090447372_MakeCategoryIDNullable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202408090619199_MakeCategoryDTO.cs" />
+    <Compile Include="Migrations\202408090619199_MakeCategoryDTO.designer.cs">
+      <DependentUpon>202408090619199_MakeCategoryDTO.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202408090639268_AddCategoryEvent.cs" />
+    <Compile Include="Migrations\202408090639268_AddCategoryEvent.designer.cs">
+      <DependentUpon>202408090639268_AddCategoryEvent.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\CategoryEvent.cs" />
     <Compile Include="Models\Event.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -307,9 +327,15 @@
     <Content Include="Views\User\New.cshtml" />
     <Content Include="Views\User\DeleteConfirm.cshtml" />
     <Content Include="Views\User\Edit.cshtml" />
+    <Content Include="Views\Category\List.cshtml" />
+    <Content Include="Views\Category\Details.cshtml" />
+    <Content Include="Views\Category\New.cshtml" />
+    <Content Include="Views\Category\Edit.cshtml" />
+    <Content Include="Views\Category\DeleteConfirm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\CategoryData\" />
     <Folder Include="Views\EventData\" />
     <Folder Include="Views\UserData\" />
   </ItemGroup>
@@ -355,6 +381,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202406210648150_AddUserEventForeignKey.resx">
       <DependentUpon>202406210648150_AddUserEventForeignKey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202408090439328_AddCategoryModel.resx">
+      <DependentUpon>202408090439328_AddCategoryModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202408090447372_MakeCategoryIDNullable.resx">
+      <DependentUpon>202408090447372_MakeCategoryIDNullable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202408090619199_MakeCategoryDTO.resx">
+      <DependentUpon>202408090619199_MakeCategoryDTO.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202408090639268_AddCategoryEvent.resx">
+      <DependentUpon>202408090639268_AddCategoryEvent.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

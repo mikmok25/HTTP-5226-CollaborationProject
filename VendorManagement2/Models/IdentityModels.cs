@@ -28,7 +28,10 @@ namespace VendorManagement2.Models
         // represent the gateway between our C# application and databasse
         public DbSet<Event> Events { get; set; }
         public DbSet<User> Users { get;set; }
-        public DbSet<UserEvent> UserEvents { get; set; }    
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<UserEvent> UserEvents { get; set; }
+        
+        public DbSet<CategoryEvent> CategoryEvents { get; set; }
         public static ApplicationDbContext Create()
         {
 

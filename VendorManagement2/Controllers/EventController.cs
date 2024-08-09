@@ -101,6 +101,19 @@ namespace VendorManagement2.Controllers
         // GET: Events/New
         public ActionResult New()
         {
+            string url = "eventdata/listcategories"; // Assuming you create a new API method in EventDataController
+            HttpResponseMessage response = client.GetAsync(url).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                IEnumerable<CategoryDto> categories = response.Content.ReadAsAsync<IEnumerable<CategoryDto>>().Result;
+                ViewBag.CategoryID = new SelectList(categories, "CategoryID", "CategoryName");
+            }
+            else
+            {
+                ViewBag.CategoryID = new SelectList(Enumerable.Empty<CategoryDto>(), "CategoryID", "CategoryName");
+            }
+
             return View();
         }
 
@@ -115,9 +128,10 @@ namespace VendorManagement2.Controllers
             content.Headers.ContentType.MediaType = "application/json";
 
             HttpResponseMessage response = client.PostAsync(url, content).Result;
-            
+
             return RedirectToAction("List");
             
+
         }
 
         // GET: Events/Edit/5

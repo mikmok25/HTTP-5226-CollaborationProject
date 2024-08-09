@@ -1,0 +1,37 @@
+﻿@model IEnumerable<VendorManagement2.Models.Category>
+
+@{
+    ViewBag.Title = "Categories List";
+}
+
+<h2>Categories</h2>
+
+<p>
+    @Html.ActionLink("Create New", "New", null, new { @class = "btn btn-primary" })
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.First().CategoryName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CategoryName)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.CategoryID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.CategoryID }) |
+                    @Html.ActionLink("Delete", "DeleteConfirm", new { id = item.CategoryID })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

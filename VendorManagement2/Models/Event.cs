@@ -18,6 +18,11 @@ namespace VendorManagement2.Models
         public DateTime EventDate { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
+        // Foreign key for Category
+        public int? CategoryID { get; set; }
+
+        // Navigation property
+        public virtual ICollection<CategoryEvent> CategoryEvents { get; set; }
         public virtual ICollection<UserEvent> UserEvents { get; set; }
     }
 

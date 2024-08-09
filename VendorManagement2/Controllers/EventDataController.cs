@@ -9,6 +9,7 @@ using System.Data.Entity;
 using System.Net;
 using System.Data.Entity.Infrastructure;
 
+
 namespace VendorManagement2.Controllers
 {
     public class EventDataController : ApiController
@@ -320,5 +321,21 @@ namespace VendorManagement2.Controllers
         {
             return db.Events.Count(e => e.EventID == id) > 0;
         }
+
+        [HttpGet]
+        [Route("api/EventData/listcategories")]
+        [ResponseType(typeof(IEnumerable<CategoryDto>))]
+        public IHttpActionResult ListCategories()
+        {
+            List<Category> categories = db.Categories.ToList();
+            List<CategoryDto> categoryDtos = categories.Select(c => new CategoryDto
+            {
+                CategoryID = c.CategoryID,
+                CategoryName = c.CategoryName
+            }).ToList();
+
+            return Ok(categoryDtos);
+        }
+
     }
 }
