@@ -90,17 +90,19 @@ The project has an entity-relationship diagram (ERD) that includes the following
    ```bash
    git clone https://github.com/mikmok25/HTTP-5226-CollaborationProject
    cd HTTP-5226-CollaborationProject
-2.  Restore NuGet packages:
-
-```bash
-nuget restore
+   ```
+2. Restore NuGet packages:
+  ```bash
+  nuget restore
+  ```
 3. Update-Database
-```bash
-Update-Database
+  ```bash
+  Update-Database
+  ```
 4. Run the application in Visual Studio (or with the command line)
-```bash
-dotnet run
-
+  ```bash
+  dotnet run
+  ```
 Navigate to https://localhost:5001/ to view the project.
 
 ### API Endpoints
