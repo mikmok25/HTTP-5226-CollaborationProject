@@ -1,5 +1,7 @@
 # **Gaming Builder & Event Management System**
 
+**Authors**: Mick Nixon Manuit and Ting Liu
+
 ## Overview
 
 The **Gaming Builder & Event Management System** is a collaborative project that manages vendors, components, events, and associations between users and components for events. The system is designed for administrators to monitor vendors, assign users to events, and control the number of vendors within each component category. Additionally, users can view events, register, and manage their participation in various events, allowing for easy association and component management.
